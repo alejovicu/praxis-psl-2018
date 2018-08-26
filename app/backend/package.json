@@ -2,10 +2,12 @@
   "name": "praxis-app-backend",
   "version": "1.0.0",
   "description": "It just an basic rest api",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "lint": "./node_modules/.bin/eslint src/*.js",
+    "lint-fix": "./node_modules/.bin/eslint src/*.js --fix",
+    "start": "node src/server.js"
   },
   "keywords": [
     "praxis"
@@ -13,6 +15,9 @@
   "author": "alejovicu",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^5.4.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "nodemon": "^1.18.3"
   },
   "dependencies": {
