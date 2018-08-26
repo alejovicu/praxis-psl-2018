@@ -1,3 +1,8 @@
+Required to run this praxis-app:
+ * docker
+ * docker-compose
+
+
 to deploy app:
 
 ```
@@ -7,5 +12,5 @@ to deploy app:
 to teardown app:
 
 ```
-docker-compose rm -f
+./stop-praxis-app.sh
 ```

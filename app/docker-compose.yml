@@ -7,7 +7,7 @@ services:
     depends_on:
       - praxis-db
     ports:
-      - '3000:3000'
+      - '3001:3001'
   praxis-db:
     image: mongo
     expose:
