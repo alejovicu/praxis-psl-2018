@@ -1,10 +1,11 @@
-'use strict';
+var users = require('../controllers/user-controller');
 
 module.exports = function (app) {
-  var userList = require('../controllers/user-controller');
+    app.route('/user')
+        .post(users.create)
+        .get(users.list);
 
-  app.route('/users')
-    .get(userList.list_all_users)
-    .post(userList.create_a_user)
-    .delete(userList.delete_a_user);
+    app.route('/user/:userId')
+        .get(users.read);
+    app.param('userId', users.userByID);
 };

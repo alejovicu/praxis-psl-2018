@@ -1,43 +1,38 @@
-'use strict';
+var User = require('mongoose').model('User');
 
-var mongoose = require('mongoose'),
-    User = mongoose.model('Users');
-
-exports.list_all_users = function (req, res) {
-
-    User.find({}, function (err, user) {
-        if (err)
-            res.send(err);
-        res.json(user);
+exports.create = function (req, res, next) {
+    var user = new User(req.body);
+    user.save(function (err) {
+        if (err) {
+            return next(err);
+        } else {
+            res.json(user);
+        }
     });
 };
 
-exports.create_a_user = function (req, res) {
-    var new_user = new User(req.body);
-    new_user.save(function (err, user) {
-
-        if (err)
-            res.send(err);
-        res.json(user);
+exports.list = function (req, res, next) {
+    User.find({}, function (err, users) {
+        if (err) {
+            return next(err);
+        } else {
+            res.json(users);
+        }
     });
 };
 
-exports.read_a_user = function (req, res) {
+exports.read = function (req, res) {
+    res.json(req.user);
+};
 
-  User.findById(req.params.userId, function (err, user) {
-      if (err)
-          res.send(err);
-      res.json(user);
-  });
-
-  exports.create_a_user = function (req, res) {
-    var new_user = new User(req.body);
-    new_user.save(function (err, user) {
-
-        if (err)
-            res.send(err);
-        res.json(user);
-    });
-  };
-
+exports.userByID = function (req, res, next, id) {
+    User.findOne({_id: id},
+        function (err, user) {
+            if (err) {
+                return next(err);
+            } else {
+                req.user = user;
+                next();
+            }
+        });
 };

@@ -1,23 +1,18 @@
-var express = require('express');
-var mongoose = require('mongoose');
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+const mongoose = require('mongoose');
+const User = require('./models/user-model');
+const bodyParser = require('body-parser');
 
-var db = mongoose();
-var app = express();
-var port = process.env.PORT || 3000;
+mongoose.Promise = global.Promise;
 
-//var User = require('./models/user-model');
-var bodyParser = require('body-parser');
-
-db.Promise = global.Promise;
-db.connect('mongodb://localhost/Userdb');
+mongoose.connect('mongodb://praxis-db:27017/Userdb');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var routes = require('./src/routes/user-routes');
+var routes = require('./routes/user-routes');
 routes(app);
 
 app.listen(port);
-module.exports = app;
-
-//console.log('praxis app backend running at http://localhost:'+port+'/');
