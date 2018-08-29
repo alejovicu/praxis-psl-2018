@@ -4,3 +4,19 @@
   margin: 2em;
   text-align: center;
 }
+
+.separator {
+  border: 2em;
+  margin: 2em;
+}
+.header {
+  text-align: center;
+}
+
+.jumbotron {
+    background-color: #000000;
+}
+
+h1.title {
+  color: #ffffff;
+}

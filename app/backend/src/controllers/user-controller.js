@@ -1,38 +1,47 @@
 var User = require('mongoose').model('User');
 
 exports.create = function (req, res, next) {
-    var user = new User(req.body);
-    user.save(function (err) {
-        if (err) {
-            return next(err);
-        } else {
-            res.json(user);
-        }
-    });
+  var user = new User(req.body);
+  user.save(function (err) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(user);
+    }
+  });
 };
 
-exports.list = function (req, res, next) {
-    User.find({}, function (err, users) {
-        if (err) {
-            return next(err);
-        } else {
-            res.json(users);
-        }
-    });
+const create = function (res, next, name) {
+  var user = new User({name: name});
+  user.save(function (err) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(user);
+    }
+  });
 };
 
-exports.read = function (req, res) {
-    res.json(req.user);
+const list = function (res, next) {
+  User.find({}, function (err, users) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(users);
+    }
+  });
 };
 
-exports.userByID = function (req, res, next, id) {
-    User.findOne({_id: id},
-        function (err, user) {
-            if (err) {
-                return next(err);
-            } else {
-                req.user = user;
-                next();
-            }
-        });
+exports.executeCommand = function (req, res, next) {
+  switch(req.query.command) { // it should check in lowercase
+  case 'crear':
+    // it should check if name exists
+    create(res, next, req.query.name);
+    break;
+  case 'mostrar':
+    list(res, next);
+    break;
+  default:
+    res.status(500).send('Error: Comando no válido: ' + req.query.command);
+  }
 };
