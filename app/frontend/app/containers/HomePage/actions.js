@@ -15,7 +15,7 @@
  *    }
  */
 
-import { CHANGE_USERNAME } from './constants';
+import { CHANGE_USERNAME, FETCH_USER_SUCCESS } from './constants';
 
 /**
  * Changes the input field of the form
@@ -29,4 +29,26 @@ export function changeUsername(name) {
     type: CHANGE_USERNAME,
     name,
   };
+}
+
+function fetchUserSucces(users) {
+  return {
+    type: FETCH_USER_SUCCESS,
+    users: users
+  };
+}
+
+export const fetchUsers = () => (dispatch) => {
+
+  dispatch({
+    type: 'FETCH_USER_REQUEST',
+  });
+
+  fetch('http://localhost:3001/user')
+    .then(response => {
+      return response.json();
+    })
+    .then(json => {
+      dispatch(fetchUserSucces(json));
+    });
 }

@@ -30,7 +30,7 @@ import Input from './Input';
 import Section from './Section';
 import messages from './messages';
 import { loadRepos } from '../App/actions';
-import { changeUsername } from './actions';
+import { changeUsername, fetchUsers } from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -48,16 +48,11 @@ export class HomePage extends React.PureComponent {
   }
 
   render() {
-    const { loading, error, repos } = this.props;
-    const reposListProps = {
-      loading,
-      error,
-      repos,
-    };
+    const { fetchUsers, users } = this.props;
     return (
       <div>
-        <ButtonSearch />
-        <ContainerResults />
+        <ButtonSearch fetchUsers={fetchUsers}/>
+        <ContainerResults users={users}/>
       </div>
     );
   }
@@ -66,32 +61,23 @@ export class HomePage extends React.PureComponent {
 HomePage.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  repos: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
-  onSubmitForm: PropTypes.func,
-  username: PropTypes.string,
-  onChangeUsername: PropTypes.func,
+  fetchUsers: PropTypes.func.isRequired,
+  users: PropTypes.array.isRequired
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
-    onSubmitForm: evt => {
-      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadRepos());
-    },
+    fetchUsers: () => dispatch(fetchUsers())
   };
 }
 
-const mapStateToProps = createStructuredSelector({
-  repos: makeSelectRepos(),
-  username: makeSelectUsername(),
-  loading: makeSelectLoading(),
-  error: makeSelectError(),
-});
-
 const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  state => {
+    return {
+      users: state.getIn(['home', 'users']).toJSON()
+    }
+  },
+  mapDispatchToProps
 );
 
 const withReducer = injectReducer({ key: 'home', reducer });
