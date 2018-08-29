@@ -10,3 +10,4 @@
  */
 
 export const CHANGE_USERNAME = 'boilerplate/Home/CHANGE_USERNAME';
+export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';

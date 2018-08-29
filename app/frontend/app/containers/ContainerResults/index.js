@@ -21,19 +21,21 @@ import saga from './saga';
 
 /* eslint-disable react/prefer-stateless-function */
 export class ContainerResults extends React.Component {
+
   render() {
+    const { users } = this.props;
+    const userList = users.map((user, i) => {
+      return (<li key={'user' + user.name + i}>{user.name}</li>)
+    });
+
     return (
       <div className="contenedor-resultados">
         <div className="form-group">
           <div className="table-responsive">
-            <table>
-              <thead>
-                <th>Resultados</th>
-              </thead>
-              <tbody>
-                <tr><td>Alejandro</td></tr>
-              </tbody>
-            </table>
+            <div><b>Resultados</b></div>
+            <ul>
+              {userList}
+            </ul>
           </div>
         </div>
       </div>
@@ -43,6 +45,7 @@ export class ContainerResults extends React.Component {
 
 ContainerResults.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  users: PropTypes.array.isRequired
 };
 
 const mapStateToProps = createStructuredSelector({
