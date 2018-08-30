@@ -37,7 +37,9 @@ function buttonAction () {
     $.get(
       'http://localhost:3001/user?command=mostrar',
       function( data ) {
-        data.foreach( (result) => { $( '#result' ).html( result.name ); });
+        $('#result').append('<h2 class=\'text-center result result-header\'>Resultados</h2>');
+        data.forEach(({name: n}) => $('#result').append('<p class=\'text-center result result-row\'>'+n+'</p>'));
+
       }
     );
     break;
