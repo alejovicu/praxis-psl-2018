@@ -1,5 +1,11 @@
 version: '3'
 services:
+  praxis-frontend:
+    build: frontend/.
+    depends_on:
+      - praxis-backend
+    ports:
+      - '8080:80'
   praxis-backend:
     build: backend/.
     environment:

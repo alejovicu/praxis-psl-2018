@@ -10,7 +10,9 @@
 }
 
 .result-row {
-  background: #eebbff;
+  background: #d2d4d8;
+  line-height: 150%;
+  font-size: 1.5em;
 }
 
 .separator {
