@@ -1,0 +1,44 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Praxis Test</title>
+
+  <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/functions.js"></script>
+</head>
+<body>
+
+  <div class="header jumbotron">
+      <img src="images/psl-logo.png" alt="react-boilerplate - Logo" />
+      <h1 class="display-3 title">Praxis 2018</h1></div>
+  </div>
+
+  <div class="actions">
+      <div class='separator'/>
+      <input id='txt-command' class='form-control' type='text' name='fname' />
+      <button class="btn btn-lg btn-block" onclick="buttonAction()" type="submit">Ejecutar comando</button>
+      <div class='separator'/>
+  </div>
+
+  <div className="form-horizontal">
+    <div id='result'></div>
+  </div>
+
+
+  <script> inputListener(); </script>
+
+</body>
+</html>

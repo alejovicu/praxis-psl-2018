@@ -1,13 +1,4 @@
-FROM node:8.11.4
-
-COPY ["package.json", "/usr/src/"]
-
-WORKDIR /usr/src
-
-RUN npm install -only=production
-
-COPY [".", "/usr/src/"]
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
+FROM nginx:1.12-alpine
+COPY . /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
