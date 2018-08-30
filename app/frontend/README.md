@@ -5,17 +5,15 @@
 Project created using react:
 * Required
   * Docker
+  * Docker-compose
 
 
 to build the image:
 ```
-docker build -t praxis-app-front .
+./deploy-praxis-app.sh
 ```
 
 to run the ui-service (in 8080 port):
 ```
-docker run --rm --name praxis-app-front-pod -it -p 8080:3000 praxis-app-front
+./stop-praxis-app.sh
 ```
-
-references:
-* https://www.reactboilerplate.com/
