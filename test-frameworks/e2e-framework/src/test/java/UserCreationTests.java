@@ -1,41 +1,47 @@
-import static org.junit.Assert.*;
-import static io.github.bonigarcia.wdm.DriverManagerType.CHROME;
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.containsString;
 
+import core.ApiManager;
 import pages.HomePO;
+import core.DriverManager;
 import org.junit.After;
 import org.junit.BeforeClass;
-import org.junit.Before;;
 import org.junit.Test;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.WebDriver;
+
+import java.io.IOException;
+
 
 public class UserCreationTests {
 
-    public WebDriver driver;
+    private static WebDriver driver;
 
     @BeforeClass
     public static void setupClass() {
-        WebDriverManager.chromedriver().setup();
-    }
-
-    @Before
-    public void setupTest() {
-        driver = new ChromeDriver();
+        driver = DriverManager.getDriver();
     }
 
     @After
-    public void teardown() {
+    public void teardown() throws IOException {
         if (driver != null) {
             driver.quit();
         }
+        ApiManager.callBackendAPI("command=borrar&name=Alejandro-Test1");
     }
 
     @Test
-    public void addUser() {
+    public void addUser() throws IOException, InterruptedException {
+        //Arrange
         HomePO homePO = new HomePO(driver);
         homePO.goToHome();
-        assertTrue("A dummy assert", true);
+        String user = "Alejandro-Test1";
+        String command = "crear " + user;
+
+        //Act
+        homePO.sendCommand(command);
+
+        //Assert
+        assertThat( ApiManager.callBackendAPI("command=mostrar"),
+                containsString(user));
     }
 }

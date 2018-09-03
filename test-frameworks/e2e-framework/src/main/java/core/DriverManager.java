@@ -8,8 +8,17 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverManager {
 
-  public static WebDriver getDriver() {
-     WebDriverManager.getInstance(CHROME).setup();
-     return new ChromeDriver();
-   }
+    private static WebDriver driver;
+
+    public static WebDriver getNewDriver() {
+        WebDriverManager.getInstance(CHROME).setup();
+        return new ChromeDriver();
+    }
+
+    public static WebDriver getDriver() {
+        if (driver == null) {
+            driver = getNewDriver();
+        }
+        return driver;
+    }
 }

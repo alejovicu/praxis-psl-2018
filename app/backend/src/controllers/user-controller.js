@@ -1,16 +1,5 @@
 var User = require('mongoose').model('User');
 
-exports.create = function (req, res, next) {
-  var user = new User(req.body);
-  user.save(function (err) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(user);
-    }
-  });
-};
-
 const create = function (res, next, name) {
   var user = new User({name: name});
   user.save(function (err) {
@@ -32,6 +21,16 @@ const list = function (res, next) {
   });
 };
 
+const remove = function (res, next, nameToDelete) {
+  User.remove({ name: { $eq: nameToDelete } }, function (err, users) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(users);
+    }
+  });
+};
+
 exports.executeCommand = function (req, res, next) {
   switch(req.query.command) { // it should check in lowercase
   case 'crear':
@@ -40,6 +39,9 @@ exports.executeCommand = function (req, res, next) {
     break;
   case 'mostrar':
     list(res, next);
+    break;
+  case 'borrar':
+    remove(res, next, req.query.name);
     break;
   default:
     res.status(500).send('Error: Comando no válido: ' + req.query.command);
