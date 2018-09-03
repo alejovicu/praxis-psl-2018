@@ -9,8 +9,7 @@ dependencies {
     api 'org.apache.commons:commons-math3:3.6.1'
 
     testImplementation 'junit:junit:4.12'
-    compile group: 'org.openqa.selenium.webdriver', name: 'webdriver-parent', version: '0.6.1039', ext: 'pom'
-    compile group: 'org.openqa.selenium.webdriver', name: 'webdriver-common', version: '0.6.1039'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.14.0'
     compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '2.2.5'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '3.14.0'
 }
