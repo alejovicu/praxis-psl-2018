@@ -30,7 +30,7 @@ public class UserCreationTests {
     }
 
     @Test
-    public void addUser() throws IOException, InterruptedException {
+    public void addUser() throws IOException {
         //Arrange
         HomePO homePO = new HomePO(driver);
         homePO.goToHome();
