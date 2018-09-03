@@ -1,1 +1,7 @@
 **/node_modules/**
+test-frameworks/e2e-framework/.gradle
+test-frameworks/e2e-framework/build/
+
+#intellij
+**/.idea/
+**/*.iml
