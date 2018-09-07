@@ -55,15 +55,13 @@ public class UserTests {
     * Objective: Check if a user is displayed as expected
     * Scope: List users by UI
     *
-    * Scenario: List a user
-    *
-    * Given the user "PraxisUser" exists
-    *  When I send the command "mostrar"
-    *  Then I expect to see the "PraxisUser" listed in the results
-    *
+    * Scenario: List an user
+    *   Given the user "PraxisUser" exists
+    *    When I send the command "mostrar"
+    *    Then I expect to see the "PraxisUser" listed in the results
     * */
     @Test
-    public void userListedInUI() throws IOException {
+    public void listAnUser() throws IOException {
         //Arrange
         HomePO homePO = new HomePO(driver);
         homePO.goToHome();
