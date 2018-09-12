@@ -77,4 +77,31 @@ public class UserTests {
         //Assert
         Assert.assertTrue(homePO.isNameListed(user));
     }
+
+    /*
+    * Test by Team 3
+    * Objective: Check if a user is deleted as expected
+    * Scope: Delete users using the UI
+    *
+    * Scenario: Delete an user
+    *   Given the user "Alejandro-Test1" exists
+    *    When I send the command "delete"
+    *    Then I expect not to see the "Alejandro-Test1" listed in the results
+    * */
+    @Test
+    public void deleteUser() throws IOException {
+        //Arrange
+        HomePO homePO = new HomePO(driver);
+        homePO.goToHome();
+        String user = "Alejandro-Test1";
+        String command = "delete " + user;
+
+        //Act
+        homePO.sendCommand(command);
+
+        //Assert
+        assertFalse( ApiManager.callBackendAPI("command=mostrar"),
+                containsString(user));
+    }
+
 }
