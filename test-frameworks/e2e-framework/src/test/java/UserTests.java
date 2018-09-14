@@ -77,4 +77,57 @@ public class UserTests {
         //Assert
         Assert.assertTrue(homePO.isNameListed(user));
     }
+    
+
+    
+    /*
+    * TEMPLATE FOR MANUAL TEST CASE:
+    * Objective: Check if create an user with a space between is possible
+    * Scope: create users by UI
+    *
+    * Scenario: create an user with a space between 
+    *   Given create "Username Userlastnam" command
+    *    When I send that command
+    *    Then I expect that to see when I send mostrar command that the user is created
+    * */
+    @Test
+    public void addUserWithTwo() throws IOException {
+        //Arrange
+        HomePO homePO = new HomePO(driver);
+        homePO.goToHome();
+        String user = "Nombre Apellido";
+        String command = "crear " + user;
+
+        //Act
+        homePO.sendCommand(command);
+
+        //Assert
+        assertThat( ApiManager.callBackendAPI("command=mostrar"),
+                containsString(user));
+    }
+
+    /*
+    * TEMPLATE FOR MANUAL TEST CASE:
+    * Objective: Check if create an user without name it's possible
+    * Scope: create users by UI
+    *
+    * Scenario: create an user without name
+    *   Given create "" command
+    *    When I send that command
+    *    Then I expect that nothing is created or an error message
+    * */
+    @Test
+    public void addUserWithout() throws IOException {
+        //Arrange
+        HomePO homePO = new HomePO(driver);
+        homePO.goToHome();
+        String user = "";
+        String command = "crear " + user;
+
+        //Act
+        homePO.sendCommand(command);
+
+        //Assert
+        fail("el usuario no fue creado");
+    }
 }
