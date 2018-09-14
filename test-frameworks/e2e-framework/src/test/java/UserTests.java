@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertFalse;
 import static org.hamcrest.CoreMatchers.containsString;
 
 import core.ApiManager;
