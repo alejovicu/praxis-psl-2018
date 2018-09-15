@@ -128,6 +128,6 @@ public class UserTests {
         homePO.sendCommand(command);
 
         //Assert
-        fail("el usuario no fue creado");
+        Assert.fail("el usuario no fue creado");
     }
 }
