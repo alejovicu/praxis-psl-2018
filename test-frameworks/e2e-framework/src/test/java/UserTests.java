@@ -101,8 +101,7 @@ public class UserTests {
         homePO.sendCommand(command);
 
         //Assert
-        assertFalse( ApiManager.callBackendAPI("command=mostrar"),
-                containsString(user));
+        assertFalse (homePO.isNameListed(user));
     }
 
 }
