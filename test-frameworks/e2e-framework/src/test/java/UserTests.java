@@ -77,4 +77,62 @@ public class UserTests {
         //Assert
         Assert.assertTrue(homePO.isNameListed(user));
     }
+    
+    
+    /*
+     * TEMPLATE FOR MANUAL TEST CASE:
+     * Objective: Check if an empty user is not created as undefined.
+     * Scope: List users by UI
+     *
+     * Scenario: List an empty user
+     *   Given the command "crear" is send
+     *    When I send the command "mostrar"
+     *    Then I expect to see an error message or the user is not listed as undefined.
+     * */
+    @Test
+    public void createEmptyUser() throws IOException{
+    	//Arrange
+        HomePO homePO = new HomePO(driver);
+        homePO.goToHome();
+        String command = "mostrar";
+        String commandCrear = "crear";
+
+        homePO.sendCommand(commandCrear);
+
+        homePO.sendCommand(command);
+
+        Assert.assertTrue(!homePO.isNameListed("undefined"));
+    }
+    
+    /*
+     * TEMPLATE FOR MANUAL TEST CASE:
+     * Objective: Check if a user is deleted as expected
+     * Scope: Delete users by UI
+     *
+     * Scenario: List an user
+     *   Given the user "Jerson" exists
+     *    When I send the command "borrar Jerson"
+     *    Then I expect to not to see the name Jerson in the list anymore
+     * */
+    @Test
+    public void deleteUserByUI() throws IOException{
+    	//Arrange
+        HomePO homePO = new HomePO(driver);
+        homePO.goToHome();
+        String user = "Jerson";
+        String command = "mostrar";
+        String commandBorrar = "borrar "+user;
+        
+        //Create a user
+        ApiManager.callBackendAPI("command=crear&name="+user);
+
+        //Delete a user
+        homePO.sendCommand(commandBorrar);
+
+        
+        homePO.sendCommand(command);
+
+        //User should not appear anymore.
+        Assert.assertTrue(!homePO.isNameListed(user));
+    }
 }
